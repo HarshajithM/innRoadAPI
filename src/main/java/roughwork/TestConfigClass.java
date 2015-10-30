@@ -34,8 +34,10 @@ public class TestConfigClass {
                     testConfig.setEmailTo(testConfigArray[8]);
                     testConfig.setEmailFrom(testConfigArray[9]);
                     testConfig.setEmailHost(testConfigArray[10]);
+                   
                 }
             }
+         
             catch (FileNotFoundException e)
             {
                 e.printStackTrace();
