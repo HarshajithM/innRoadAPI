@@ -23,6 +23,7 @@ public class TestConfigCsvFile{
                 while ((line = br.readLine()) != null){
                     // split on comma(',')
                     String[] testConfigArray = line.split(",(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))", -1);
+                    
                     testConfig.setEnvironment(testConfigArray[0]);
                     testConfig.setBaseURL(testConfigArray[1]);
                     testConfig.setUrlPort(Integer.parseInt(testConfigArray[2]));
@@ -34,10 +35,11 @@ public class TestConfigCsvFile{
                     testConfig.setEmailTo(testConfigArray[8]);
                     testConfig.setEmailFrom(testConfigArray[9]);
                     testConfig.setEmailHost(testConfigArray[10]);
-                   
+                  
                 }
+               // System.out.println(testConfig.getBaseURL());
             }
-         
+            	
             catch (FileNotFoundException e)
             {
                 e.printStackTrace();

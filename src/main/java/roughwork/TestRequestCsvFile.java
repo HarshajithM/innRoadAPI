@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import com.innroad.Utilities.TestRequest;
 
 public class TestRequestCsvFile {
@@ -13,7 +11,7 @@ public class TestRequestCsvFile {
 	public static void main(String[] args) throws IOException {
 		String testRequestPath = System.getProperty("user.dir")+"/src/main/resources/CsvFiles/Request.csv";
 		BufferedReader br = null;
-		List<TestRequest> TestRequests = new ArrayList<TestRequest>();
+		TestRequest testRequest = new TestRequest();
 		String line = "";
             try {   
             	br = new BufferedReader(new FileReader(testRequestPath));
@@ -22,8 +20,8 @@ public class TestRequestCsvFile {
                 while ((line = br.readLine()) != null){
                     // split on comma(',')
                     String[] testRequestArray = line.split(",(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))", -1);
-                    TestRequest testRequest = new TestRequest();
-                    testRequest.setId(Integer.parseInt(testRequestArray[0]));
+                    
+                    testRequest.setId(Long.parseLong(testRequestArray[0]));
                     testRequest.setMethod(testRequestArray[1]);
                     testRequest.setEndpoint(testRequestArray[2]);
                     testRequest.setHeaders(testRequestArray[3]);
@@ -32,11 +30,13 @@ public class TestRequestCsvFile {
                     testRequest.setInput1(testRequestArray[6]);
                     testRequest.setInputFile(testRequestArray[7]);
                     testRequest.setParam1(testRequestArray[8]);
-                    testRequest.setDescription(testRequestArray[9]);
-                    testRequest.setReqContentType(testRequestArray[10]);
-                    testRequest.setRespContentType(testRequestArray[10]);
-                    TestRequests.add(testRequest);
+                    testRequest.setParamFile(testRequestArray[9]);
+                    testRequest.setDescription(testRequestArray[10]);
+                    testRequest.setReqContentType(testRequestArray[11]);
+                    testRequest.setRespContentType(testRequestArray[12]);
+                   
                 }
+                System.out.println (testRequest.getReqContentType());
             }
          
             catch (FileNotFoundException e)

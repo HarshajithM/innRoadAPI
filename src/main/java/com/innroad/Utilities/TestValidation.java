@@ -14,7 +14,7 @@ public class TestValidation {
 	private String 	validationDescription;
 	private String 	negTest;
 
-	public Long getDateId(){
+	public Long getDataId(){
 		return dataId;
 	}
 	public void setDataId(Long dataId){
@@ -58,7 +58,7 @@ public class TestValidation {
 		return respCode;
 	}
 
-	public void seRespCode(String respCode) {
+	public void setRespCode(String respCode) {
 		this.respCode = respCode;
 	}
 
@@ -90,7 +90,7 @@ public class TestValidation {
 		return validationDescription;
 	}
 
-	public void setRespDescription(String validationDescription){
+	public void setValidationDescription(String validationDescription){
 		this.validationDescription = validationDescription;
 	}
 

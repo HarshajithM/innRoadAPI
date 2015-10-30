@@ -4,26 +4,57 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 
 public class TestRunnerUtilities {
 
 	public static Logger APPLICATION_LOGS = Logger.getLogger("rootLogger");
-	
-	
-// testConfigReader  ---- done!!
-// testRequestReader
-// testResponseReader
-// testValidationReader
 
-	public TestConfig loadTestConfigFile (String testConfigPath) throws IOException{
-		testConfigPath = System.getProperty("user.dir")+"/src/main/resources/CsvFiles/TestConfig.csv";
+	// DateFormat		 ---- done!!
+	// testConfigReader  ---- done!!
+	// testRequestReader  --- done!!
+	// testValidationReader - done!!
+	// testResponseReader
+
+	public static String currentDateTime(String dateFormat) {
+		// Format: ("yyyy/MM/dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        return sdf.format(cal.getTime());
+    }
+	public static String currentDate(){ 
+		Date date;
+		Calendar currentDate = Calendar.getInstance(); //Get the current date
+		date = currentDate.getTime();
+		SimpleDateFormat formatter= new SimpleDateFormat("MMM"+" "+"dd"+","+" YYYY"); //format it as per your requirement
+		return formatter.format(date);
+	}
+	public static String currentTime(){ 
+		@SuppressWarnings("unused")
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+		//get current date time with Date()
+		@SuppressWarnings("unused")
+		Date date = new Date();
+		//get current date time with Calendar()
+		@SuppressWarnings("unused")
+		Calendar cal = Calendar.getInstance();
+		return null;
+		
+	}
+
+	// Load Test Configuration File
+	public TestConfig loadTestConfigFile (String testConfigCsvPath) throws IOException{
+		testConfigCsvPath = System.getProperty("user.dir")+"/src/main/resources/CsvFiles/TestConfig.csv";
 		BufferedReader br = null;
 		TestConfig testConfig = new TestConfig();
 		String line = "";
 		try {   
-			br = new BufferedReader(new FileReader(testConfigPath));
+			br = new BufferedReader(new FileReader(testConfigCsvPath));
 			br.readLine(); // skip the first row or line
 
 			while ((line = br.readLine()) != null){
@@ -46,10 +77,90 @@ public class TestRunnerUtilities {
 		}catch (IOException e){
 			e.printStackTrace();
 		}br.close();
-		  return testConfig;
+		return testConfig;
 	}
 
-	
-	
-	
+	// Load Test Request Configuration File 
+	// Challenge: How to connect the requestCsvPath from TestConfig.csv file
+	public void loadTestRequestFile (String testRequestCsvPath) throws IOException{
+		testRequestCsvPath = System.getProperty("user.dir")+"/src/main/resources/CsvFiles/Request.csv";
+		BufferedReader br = null;
+		TestRequest testRequest = new TestRequest();
+		String line = "";
+		try {   
+			br = new BufferedReader(new FileReader(testRequestCsvPath));
+			br.readLine(); // skip the first row or line
+			while ((line = br.readLine()) != null){
+				String[] testRequestArray = line.split(",(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))", -1);
+
+				testRequest.setId(Long.parseLong(testRequestArray[0]));
+				testRequest.setMethod(testRequestArray[1]);
+				testRequest.setEndpoint(testRequestArray[2]);
+				testRequest.setHeaders(testRequestArray[3]);
+				testRequest.setHeadersFile(testRequestArray[4]);
+				testRequest.setReqBody(testRequestArray[5]);
+				testRequest.setInput1(testRequestArray[6]);
+				testRequest.setInputFile(testRequestArray[7]);
+				testRequest.setParam1(testRequestArray[8]);
+				testRequest.setParamFile(testRequestArray[9]);
+				testRequest.setDescription(testRequestArray[10]);
+				testRequest.setReqContentType(testRequestArray[11]);
+				testRequest.setRespContentType(testRequestArray[12]);
+
+			}
+			System.out.println (testRequest.getReqContentType());
+		}
+
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		br.close();
+	}
+
+	// Load Test Validation Configuration File
+	// Challenge: How to connect the validationCsvPath from TestConfig.csv file
+	public void loadTestValidationFile (String testValidationCsvPath) throws IOException{
+		testValidationCsvPath = System.getProperty("user.dir")+"/src/main/resources/CsvFiles/Validation.csv";
+		BufferedReader br = null;
+		TestValidation testValidation = new TestValidation();
+		String line = "";
+		try {   
+			br = new BufferedReader(new FileReader(testValidationCsvPath));
+			br.readLine(); // skip the first row or line
+			while ((line = br.readLine()) != null){
+				String[] testValidationArray = line.split(",(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))", -1);
+
+				testValidation.setDataId(Long.parseLong(testValidationArray[0]));
+				testValidation.setTextValidation(testValidationArray[1]);
+				testValidation.setHeaderValidation(testValidationArray[2]);
+				testValidation.setFieldValidation(testValidationArray[3]);
+				testValidation.setFieldValidationText(testValidationArray[4]);
+				testValidation.setRespCode(testValidationArray[5]);
+				testValidation.setErrorMessage(testValidationArray[6]);
+				testValidation.setJsonSchemaPath(testValidationArray[7]);
+				testValidation.setXmlSchemaPath(testValidationArray[8]);
+				testValidation.setValidationDescription(testValidationArray[9]);
+				testValidation.setNegTest(testValidationArray[10]);
+			}
+			//System.out.println(testValidation.getNegTest());
+		}
+
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		br.close();
+	}
 }
+
+
+
