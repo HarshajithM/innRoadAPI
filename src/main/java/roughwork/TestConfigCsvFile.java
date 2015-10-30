@@ -8,7 +8,7 @@ import com.innroad.Utilities.TestConfig;
 
 
 
-public class TestConfigClass {
+public class TestConfigCsvFile{
 
 	public static void main(String[] args) throws IOException {
 

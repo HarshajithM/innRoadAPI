@@ -5,14 +5,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class TestRunnerUntilties {
+import org.apache.log4j.Logger;
 
+public class TestRunnerUtilities {
+
+	public static Logger APPLICATION_LOGS = Logger.getLogger("rootLogger");
+	
+	
 // testConfigReader  ---- done!!
 // testRequestReader
 // testResponseReader
 // testValidationReader
 
-	public void testConfigReader (String testConfigPath) throws IOException{
+	public TestConfig loadTestConfigFile (String testConfigPath) throws IOException{
 		testConfigPath = System.getProperty("user.dir")+"/src/main/resources/CsvFiles/TestConfig.csv";
 		BufferedReader br = null;
 		TestConfig testConfig = new TestConfig();
@@ -41,6 +46,10 @@ public class TestRunnerUntilties {
 		}catch (IOException e){
 			e.printStackTrace();
 		}br.close();
+		  return testConfig;
 	}
 
+	
+	
+	
 }

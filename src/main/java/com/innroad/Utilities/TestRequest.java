@@ -2,7 +2,7 @@ package com.innroad.Utilities;
 
 public class TestRequest {
 	
-    private Long 	ID;
+    private int 	ID;
     private String 	method;
     private String 	endpoint;
     private String 	headers;
@@ -18,10 +18,10 @@ public class TestRequest {
  
 
 
-    public Long getId(){
+    public int getId(){
         return ID;
     }
-    public void setId(Long ID){
+    public void setId(int ID){
         this.ID = ID;
     }
     public String getMethod() {
