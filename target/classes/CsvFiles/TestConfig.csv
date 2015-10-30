@@ -1,0 +1,12 @@
+Parameters,Values
+environment,qa
+baseURL,innroad
+urlPort,8080
+project,innRoadApi
+testRequestFile,./resources/csvFiles/Endpoints.csv
+testValidationFile,./resources/csvFiles/Validation.csv
+name,hasan
+password,password12
+emailTo,abul.h.bhuiyan@gmail.com
+emailFrom,hasanyc@hotmail.com
+emailHost,gmail
