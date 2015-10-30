@@ -12,7 +12,7 @@ public class HTMLReport {
 	public static void main(String[] args) throws IOException {
 
 		BufferedWriter out 		= null;
-		String fileName 		= System.getProperty("user.dir")+"/src/main/resources/Reports/HTMLReport.html";
+		String fileName 		= System.getProperty("user.dir")+"/src/main/resources/Reports/index.html";
 		String ProjectName 		= "innRoad-API";
 		String Environment		= "QA";
 		String baseURL			= "qa.innroad.com";

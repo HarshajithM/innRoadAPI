@@ -10,7 +10,7 @@ public class HTMLErrorReport {
 	public static void main(String[] args) {
 		
 		BufferedWriter out 		= null;
-		String fileName 		= System.getProperty("user.dir")+"/src/main/resources/Reports/HtmlFailedReport.html";
+		String fileName 		= System.getProperty("user.dir")+"/src/main/resources/Reports/failed.html";
 		String ProjectName 		= "innRoad-API";
 		String Environment		= "QA";
 		String RunDate			= TestRunnerUtilities.currentDateTime("MM/dd/yyyy");
