@@ -4,15 +4,23 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 public class TestRunnerUtilities {
+	public static String env;
+	public static String projectName;
+	public static String eMailTo;
+	public static String eMailHost;
+	public static String eMailFrom;
+	public static String baseURL;
+	public static Integer port;
 
+	static TestConfig testConfig = new TestConfig();
+	public static String testConfigCsvPath = System.getProperty("user.dir")+"/src/main/resources/CsvFiles/TestConfig.csv";
 	public static Logger APPLICATION_LOGS = Logger.getLogger("rootLogger");
 
 	// DateFormat		 ---- done!!
@@ -21,37 +29,31 @@ public class TestRunnerUtilities {
 	// testValidationReader - done!!
 	// testResponseReader
 
-	public static String currentDateTime(String dateFormat) {
-		// Format: ("yyyy/MM/dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-        return sdf.format(cal.getTime());
-    }
-	public static String currentDate(){ 
-		Date date;
-		Calendar currentDate = Calendar.getInstance(); //Get the current date
-		date = currentDate.getTime();
-		SimpleDateFormat formatter= new SimpleDateFormat("MMM"+" "+"dd"+","+" YYYY"); //format it as per your requirement
-		return formatter.format(date);
+	public static void suiteInit() throws IOException  {
+		BasicConfigurator.configure();
+		APPLICATION_LOGS.debug("Starting the test suite");
+		APPLICATION_LOGS.debug("Loading testConfig CSV file");
+		testConfig = loadTestConfigFile(testConfigCsvPath);
+		env 		= testConfig.getEnvironment();
+		projectName = testConfig.getProject();
+		eMailTo 	= testConfig.getEmailTo();
+		eMailFrom 	= testConfig.getEmailFrom();
+		eMailHost 	= testConfig.getEmailHost();
+		baseURL 	= testConfig.getBaseURL();
+		port		= testConfig.getUrlPort();
 	}
-	public static String currentTime(){ 
-		@SuppressWarnings("unused")
-		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-		//get current date time with Date()
-		@SuppressWarnings("unused")
-		Date date = new Date();
-		//get current date time with Calendar()
-		@SuppressWarnings("unused")
+
+	public static String currentDateTime(String dateFormat) {
+		// Format: ("MM/dd/yyyy hh:mm:ss a");
 		Calendar cal = Calendar.getInstance();
-		return null;
-		
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+		return sdf.format(cal.getTime());
 	}
 
 	// Load Test Configuration File
-	public TestConfig loadTestConfigFile (String testConfigCsvPath) throws IOException{
-		testConfigCsvPath = System.getProperty("user.dir")+"/src/main/resources/CsvFiles/TestConfig.csv";
+	public static TestConfig loadTestConfigFile (String testConfigCsvPath) throws IOException{
 		BufferedReader br = null;
-		TestConfig testConfig = new TestConfig();
+		//TestConfig testConfig = new TestConfig();
 		String line = "";
 		try {   
 			br = new BufferedReader(new FileReader(testConfigCsvPath));

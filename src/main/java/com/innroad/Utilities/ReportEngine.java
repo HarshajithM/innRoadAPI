@@ -10,7 +10,7 @@ public class ReportEngine {
 	public static void HTMLReport (String fileName, String ProjectName, String Environment, String baseURL, Integer port, String runBy){
 
 		BufferedWriter out 		= null;
-		fileName 				= System.getProperty("user.dir")+"/src/main/resources/Reports/HTMLReport.html";
+		fileName 				= System.getProperty("user.dir")+"/src/main/resources/Reports/index.html";
 		ProjectName 			= "innRoad-API";
 		Environment				= "QA";
 		baseURL					= "qa.innroad.com";
@@ -83,7 +83,7 @@ public class ReportEngine {
 	public static void failedReport (String fileName, String ProjectName, String Environment){
 
 		BufferedWriter out 		= null;
-		fileName 				= System.getProperty("user.dir")+"/src/main/resources/Reports/HtmlFailedReport.html";
+		fileName 				= System.getProperty("user.dir")+"/src/main/resources/Reports/Failed.html";
 		ProjectName 			= "innRoad-API";
 		Environment				= "QA";
 		String RunDate			= TestRunnerUtilities.currentDateTime("MM/dd/yyyy");
