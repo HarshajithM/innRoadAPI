@@ -37,7 +37,7 @@ public class TestValidationCsvFile{
                     testValidation.setNegTest(testValidationArray[10]);
                   
                 }
-                //System.out.println(testValidation.getNegTest());
+                System.out.println(testValidation.getNegTest());
             }
             	
             catch (FileNotFoundException e)

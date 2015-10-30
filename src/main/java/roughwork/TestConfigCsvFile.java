@@ -37,7 +37,7 @@ public class TestConfigCsvFile{
                     testConfig.setEmailHost(testConfigArray[10]);
                   
                 }
-               // System.out.println(testConfig.getBaseURL());
+                System.out.println(testConfig.getBaseURL());
             }
             	
             catch (FileNotFoundException e)
